@@ -1,8 +1,9 @@
 FROM ubuntu:latest
-RUN useradd -ms /bin/bash ubuntu -p pub123
-USER ubuntu
 WORKDIR /home/ubuntu
 RUN apt update && apt install  openssh-server sudo -y
+
+RUN useradd -ms /bin/bash ubuntu -p pub123
+USER ubuntu
 # Create a user “sshuser” and group “sshgroup”
 RUN groupadd sshgroup && useradd -ms /bin/bash -g sshgroup ubuntu
 # Create sshuser directory in home
