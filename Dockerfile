@@ -1,4 +1,7 @@
 FROM ubuntu:latest
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 ubuntu -p pub123
+USER ubuntu
+WORKDIR /home/ubuntu
 RUN apt update && apt install  openssh-server sudo -y
 # Create a user “sshuser” and group “sshgroup”
 RUN groupadd sshgroup && useradd -ms /bin/bash -g sshgroup sshuser
@@ -12,4 +15,4 @@ RUN chown sshuser:sshgroup /home/sshuser/.ssh/authorized_keys && chmod 600 /home
 RUN service ssh start
 # Expose docker port 22
 EXPOSE 22
-CMD ["/usr/sbin/sshd","-D"]
+CMD ["/usr/sbin/sshd","-D",]
